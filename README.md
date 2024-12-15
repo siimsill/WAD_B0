@@ -1,4 +1,4 @@
-# WAD-lab13-frontend
+# WAD Group-BO
 
 ## Project setup
 ```
