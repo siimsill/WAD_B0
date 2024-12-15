@@ -1,14 +1,20 @@
 <template>
-  <div class="form">
-    <h3>LogIn</h3>
-    <label for="email">Email</label>
-    <input type="email" name="email"  required v-model="email">
-    <label for="password">Password</label>
-    <input type="password" name="password" required v-model="password">
-    <div class="container">
-      <button @click="LogIn"  class="center">LogIn</button>
-      <button @click='this.$router.push("/signup")' class="center">Signup</button>
-    </div>
+  <div class="login-container">
+    <form class="login-form" @submit.prevent="LogIn">
+      <h3>Log In</h3>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" v-model="email" required placeholder="Email" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" v-model="password" required placeholder="Password" />
+      </div>
+      <div class="form-buttons">
+      <button @click="LogIn"  class="login-button">LogIn</button>
+      <button @click='this.$router.push("/signup")' class="signup-button">Signup</button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -56,55 +62,91 @@ LogIn() {
 </script>
 
 <style scoped>
-.form {
-  max-width: 420px;
-  margin: 30px auto;
-  background: rgb(167, 154, 154);
-  text-align: left;
-  padding: 40px;
-  border-radius: 10px;
-}
-h3 {
-  text-align: center;
-  color: rgb(8, 110, 110);
-}
-label {
-  color: rgb(8, 110, 110);
-  display: inline-block;
-  margin: 25px 0 15px;
-  font-size: 0.8em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: bold;
-}
-input {
-  display: block;
-  padding: 10px 6px;
-  width: 100%;
-  box-sizing: border-box;
-  border: none;
-  border-bottom: 1px solid white;
-  color: blue;
-}
-button {
-  background: rgb(8, 110, 110);
-  border: 0;
-  padding: 10px 20px;
-  margin: 20px 20px 20px 20px;
-  color: white;
-  border-radius: 20px;
-  align-items: center;
-  text-align: center;
-}
-.center {
-  margin: auto;
-  border: 0;
-  padding: 10px 20px;
-  margin-top: 20px;
-  width: 30%; 
-}
-.container {
+.login-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.login-form {
+  background-color: #e8f5e9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+h3 {
+  text-align: center;
+  color: #00695c;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #fff;
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+  width: 95%;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.login-button,
+.signup-button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+.signup-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
+.signup-button:hover {
+  background-color: #218838;
 }
 </style>

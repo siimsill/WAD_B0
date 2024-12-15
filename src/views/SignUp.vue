@@ -1,7 +1,7 @@
 <template>
   <div class="signup-container">
     <form class="signup-form">
-      <h3>SignUp</h3>
+      <h3>Sign Up!</h3>
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" name="email" v-model="email" required placeholder="Email" />
@@ -105,6 +105,7 @@ input {
   background-color: #fff;
   box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
   flex: 2;
+  width: 100%;
 }
 
 input:focus {
