@@ -18,6 +18,10 @@
         </div>
       </div>
     </div>
+    <div>
+      <button @click="goToAddPost()">Add post</button>
+      <button>Delete all</button>
+    </div>
   </div>
 </template>
 
@@ -34,6 +38,9 @@ export default {
   methods: {
     goToPostDetail(postId) {
       this.$router.push(`/post/${postId}`)
+    },
+    goToAddPost() {
+      this.$router.push('/post/add')
     }
   },
   mounted() {

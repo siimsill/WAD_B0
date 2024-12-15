@@ -4,6 +4,7 @@ import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
 import auth from "../auth";
 import PostView from "@/views/PostView.vue";
+import AddPostView from "@/views/AddPostView.vue";
 
 
 
@@ -44,6 +45,28 @@ const routes = [{
         path: "/post/:id",
         name: "PostView",
         component: PostView,
+        beforeEnter: async (to, from, next) => {
+            let authResult = await auth.authenticated();
+            if (!authResult) {
+                next('/login');
+            } else {
+                next();
+            }
+        }
+    },
+    {
+        path: "/contact",
+        name: "Contact",
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+            import ( /* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    },
+    {
+        path: "/post/add",
+        name: "AddPostView",
+        component: AddPostView,
         beforeEnter: async (to, from, next) => {
             let authResult = await auth.authenticated();
             if (!authResult) {

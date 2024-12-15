@@ -127,19 +127,29 @@ app.get('/auth/logout', (req, res) => {
 });
 
 // ADD POST
-app.post('/api/posts/', async(req, res) => {
+app.post('/api/posts', async (req, res) => {
     try {
-        console.log("a post request has arrived");
-        const post = req.body;
-        const newpost = await pool.query(
-            "INSERT INTO Posts(title, body, urllink) values ($1, $2, $3)    RETURNING*", [post.title, post.body, post.urllink]
-// $1, $2, $3 are mapped to the first, second and third element of the passed array (post.title, post.body, post.urllink) 
-// The RETURNING keyword in PostgreSQL allows returning a value from the insert or update statement.
-// using "*" after the RETURNING keyword in PostgreSQL, will return everything
+        console.log("A POST request has arrived.");
+        const { content } = req.body;
+
+        if (!content) {
+            return res.status(400).json({ error: "Content is required" });
+        }
+
+        const now = new Date();
+        const create_year = now.getFullYear();
+        const create_month = now.getMonth() + 1; 
+        const create_day = now.getDate();
+
+        const newPost = await pool.query(
+            "INSERT INTO Posts (create_year, create_month, create_day, content) VALUES ($1, $2, $3, $4) RETURNING *",
+            [create_year, create_month, create_day, content]
         );
-        res.json(newpost);
+
+        res.status(201).json(newPost.rows[0]); 
     } catch (err) {
-        console.error(err.message);
+        console.error("Error adding post:", err.message);
+        res.status(500).json({ error: "Failed to add the post" });
     }
 });
 
