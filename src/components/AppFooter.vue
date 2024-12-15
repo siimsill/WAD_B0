@@ -10,7 +10,6 @@
   color: #fff;
   padding: 10px;
   text-align: center;
-  width: 100%;
   margin-top: 1%;
 }
 </style>
