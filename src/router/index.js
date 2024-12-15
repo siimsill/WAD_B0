@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import HomePage from '@/views/HomePage.vue';
 import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
 import auth from "../auth";
@@ -10,7 +10,7 @@ import auth from "../auth";
 const routes = [{
         path: "/",
         name: "home",
-        component: HomeView,
+        component: HomePage,
         beforeEnter: async(to, from, next) => {
             let authResult = await auth.authenticated();
             if (!authResult) {
