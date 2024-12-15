@@ -209,7 +209,7 @@ app.delete('/api/posts/:id', async(req, res) => {
         //const post = req.body; // we do not need a body for a delete request
         console.log("delete a post request has arrived");
         const deletepost = await pool.query(
-            "DELETE FROM Posts WHERE post_id = $1", [id]
+            "DELETE FROM Posts WHERE id = $1", [id]
         );
         res.json(deletepost);
     } catch (err) {

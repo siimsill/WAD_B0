@@ -1,7 +1,7 @@
 <template>
   <div class="signup-container">
     <form class="signup-form">
-      <h3>SignUp</h3>
+      <h3>Sign Up!</h3>
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" name="email" v-model="email" required placeholder="Email" />
@@ -70,13 +70,13 @@ SignUp() {
 
 .signup-form {
   background-color: #e8f5e9;
-  padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   width: 30%;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin: auto;
 }
 
 h3 {
@@ -105,6 +105,8 @@ input {
   background-color: #fff;
   box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
   flex: 2;
+  margin-right: 5%;
+  width: 80%;
 }
 
 input:focus {
@@ -122,9 +124,18 @@ input:focus {
   cursor: pointer;
   text-align: center;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 150px;
+  margin: 10px auto;
+  margin-bottom: 20px;
 }
 
 .signup-button:hover {
   background-color: #0056b3;
+}
+
+@media (max-width: 480px) {
+  .signup-form {
+    width: 90%;
+  }
 }
 </style>

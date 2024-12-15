@@ -4,14 +4,11 @@
       <button @click="logout()" class="button">Logout</button>
       <div v-for="post in posts" :key="post.post_id" class="post" @click="goToPostDetail(post.post_id)">
         <div class="post-header">
-          <img :src="post.pfp_url" alt="User Icon" class="profile-image" />
           <div>
-            <h3 class="post-author">{{ post.author_name }} {{ post.author_lastname }}</h3>
             <p class="post-date">{{ post.create_year }}-{{ post.create_month }}-{{ post.create_day }}</p>
           </div>
         </div>
         <div class="post-body">
-          <img v-if="post.photo_url !== 'null'" :src="post.photo_url" class="post-image" />
           <p v-if="post.content !== 'null'" class="post-text">{{ post.content }}</p>
         </div>
         <div class="post-actions">
