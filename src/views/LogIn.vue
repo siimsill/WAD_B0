@@ -75,7 +75,6 @@ LogIn() {
   background-color: #e8f5e9;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   width: 30%;
   display: flex;
   flex-direction: column;
@@ -105,7 +104,6 @@ input {
   border-radius: 5px;
   font-size: 1rem;
   background-color: #fff;
-  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
   width: 95%;
 }
 
@@ -127,7 +125,6 @@ input:focus {
   font-size: 1rem;
   cursor: pointer;
   text-align: center;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .login-button {
