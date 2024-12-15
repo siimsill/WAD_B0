@@ -9,25 +9,20 @@ export const store = createStore({
     setPosts(state, posts) {
       state.posts = posts;
     },
-    likePost(state, postId) {
-      if (state.likedPosts.includes(postId)) {
-        state.likedPosts = state.likedPosts.filter(id => id !== postId);
-      } else {
-        state.likedPosts.push(postId);
-      }
-    },
-    resetLikes(state) {
-      state.likedPosts = []; 
-    },
   },
   actions: {
     async fetchPosts({ commit }) {
       try {
-        const response = await fetch('/posts.json');
+        const response = await fetch('http://localhost:3000/api/posts'); // Fetch posts from the backend API
+        if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+
         const data = await response.json();
-        commit('setPosts', data);
+        commit('setPosts', data); // Commit the posts to the state
+        console.log('Posts fetched successfully:', data);
       } catch (error) {
-        console.error('Error fetching local JSON:', error);
+        console.error('Error fetching posts:', error);
       }
     },
   },

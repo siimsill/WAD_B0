@@ -10,24 +10,13 @@
           </div>
         </div>
         <div class="post-body">
-          <img v-if="post.photo_url !== 'null'" :src="post.photo_url" alt="Post Image" class="post-image" />
+          <img v-if="post.photo_url !== 'null'" :src="post.photo_url" class="post-image" />
           <p v-if="post.content !== 'null'" class="post-text">{{ post.content }}</p>
         </div>
         <div class="post-actions">
-          <button
-            class="like-button"
-            @click="toggleLike(post.post_id)"
-            :class="{ liked: isLiked(post.post_id) }"
-          >
-            👍
-          </button>
-          <span>{{ getLikes(post.post_id) }} likes</span>
+          <!--  -->
         </div>
       </div>
-    </div>
-    <!-- Reset Likes Button -->
-    <div class="reset-likes">
-      <button @click="resetAllLikes">Reset All Likes</button>
     </div>
   </div>
 </template>
@@ -43,19 +32,7 @@ export default {
     },
   },
   methods: {
-    toggleLike(postId) {
-      this.$store.commit('likePost', postId);
-    },
-    isLiked(postId) {
-      return this.likedPosts.includes(postId);
-    },
-    getLikes(postId) {
-      return this.isLiked(postId) ? 1 : 0;
-    },
 
-    resetAllLikes() {
-      this.$store.commit('resetLikes');
-    },
   },
   mounted() {
     this.$store.dispatch('fetchPosts');
