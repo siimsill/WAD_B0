@@ -9,6 +9,9 @@ export const store = createStore({
     setPosts(state, posts) {
       state.posts = posts;
     },
+    setPost(state, post) {
+      state.post = post;
+    }
   },
   actions: {
     async fetchPosts({ commit }) {
@@ -25,5 +28,15 @@ export const store = createStore({
         console.error('Error fetching posts:', error);
       }
     },
+   async fetchPostById({ commit }, id) {
+      try {
+        const response = await fetch(`http://localhost:3000/api/posts/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch post');
+        const data = await response.json();
+        commit('setPost', data);
+      } catch (error) {
+        console.error(`Error fetching post with ID ${id}:`, error);
+      }
+    }
   },
 });

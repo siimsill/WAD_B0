@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="posts" id="posts-container">
-      <div v-for="post in posts" :key="post.post_id" class="post">
+      <div v-for="post in posts" :key="post.post_id" class="post" @click="goToPostDetail(post.post_id)">
         <div class="post-header">
           <img :src="post.pfp_url" alt="User Icon" class="profile-image" />
           <div>
@@ -32,7 +32,9 @@ export default {
     },
   },
   methods: {
-
+    goToPostDetail(postId) {
+      this.$router.push(`/post/${postId}`)
+    }
   },
   mounted() {
     this.$store.dispatch('fetchPosts');

@@ -3,6 +3,7 @@ import HomePage from '@/views/HomePage.vue';
 import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
 import auth from "../auth";
+import PostView from "@/views/PostView.vue";
 
 
 
@@ -39,6 +40,19 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "about" */ "../views/AboutView.vue"),
     },
+    {
+        path: "/post/:id",
+        name: "PostView",
+        component: PostView,
+        beforeEnter: async (to, from, next) => {
+            let authResult = await auth.authenticated();
+            if (!authResult) {
+                next('/login');
+            } else {
+                next();
+            }
+        }
+    }
 ];
 
 const router = createRouter({
