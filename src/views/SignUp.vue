@@ -105,7 +105,8 @@ input {
   background-color: #fff;
   box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
   flex: 2;
-  width: 100%;
+  margin-right: 5%;
+  width: 80%;
 }
 
 input:focus {
@@ -123,6 +124,9 @@ input:focus {
   cursor: pointer;
   text-align: center;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 150px;
+  margin: 10px auto;
+  margin-bottom: 20px;
 }
 
 .signup-button:hover {
