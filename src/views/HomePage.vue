@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="posts" id="posts-container">
+      <button @click="logout()" class="button">Logout</button>
       <div v-for="post in posts" :key="post.post_id" class="post" @click="goToPostDetail(post.post_id)">
         <div class="post-header">
           <img :src="post.pfp_url" alt="User Icon" class="profile-image" />
@@ -17,12 +18,13 @@
           <!--  -->
         </div>
       </div>
-    </div>
-    <div>
-      <button @click="goToAddPost()">Add post</button>
-      <button>Delete all</button>
+      <div class="buttons">
+        <button @click="goToAddPost()" class="button">Add post</button>
+        <button @click="deleteAllPosts()" class="button">Delete all</button>
+      </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -41,7 +43,43 @@ export default {
     },
     goToAddPost() {
       this.$router.push('/post/add')
-    }
+    },
+    async deleteAllPosts() {
+      try {
+        const response = await fetch('http://localhost:3000/api/posts', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to delete all posts');
+        }
+
+        alert('All posts have been deleted successfully!');
+        this.$store.dispatch('fetchPosts'); 
+      } catch (error) {
+        console.error('Error deleting all posts:', error.message);
+        alert('Error: Could not delete all posts.');
+      }
+    },
+    async logout() {
+      try {
+        const response = await fetch('http://localhost:3000/auth/logout', {
+          method: 'GET',
+          credentials: 'include', 
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to log out');
+        }
+
+        alert('Logged out successfully!');
+        this.$router.push('/login');
+      } catch (error) {
+        console.error('Error logging out:', error.message);
+        alert('Error: Could not log out.');
+      }
+    },
   },
   mounted() {
     this.$store.dispatch('fetchPosts');
@@ -140,6 +178,25 @@ export default {
 .reset-likes button:hover {
   background-color: #e60000;
 }
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  appearance: none;
+  background: rgb(56, 150, 188);
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  width: fit-content;
+  margin: auto;
+}
+
 
 
 </style>
