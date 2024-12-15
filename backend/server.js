@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:8081', credentials: true }));
+app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
 // We need to include "credentials: true" to allow cookies to be represented  
 // Also "credentials: 'include'" need to be added in Fetch API in the Vue.js App
 
@@ -132,10 +132,8 @@ app.post('/api/posts/', async(req, res) => {
         console.log("a post request has arrived");
         const post = req.body;
         const newpost = await pool.query(
-            "INSERT INTO Posts(title, body, urllink) values ($1, $2, $3)    RETURNING*", [post.title, post.body, post.urllink]
-// $1, $2, $3 are mapped to the first, second and third element of the passed array (post.title, post.body, post.urllink) 
-// The RETURNING keyword in PostgreSQL allows returning a value from the insert or update statement.
-// using "*" after the RETURNING keyword in PostgreSQL, will return everything
+            "INSERT INTO Posts(create_year, create_month, create_day, content) values ($1, $2, $3, $4) RETURNING *",
+            [post.create_year, post.create_month, post.create_day, post.content]
         );
         res.json(newpost);
     } catch (err) {
@@ -165,7 +163,7 @@ app.get('/api/posts/:id', async(req, res) => {
         const { id } = req.params; // assigning all route "parameters" to the id "object"
         const posts = await pool.query( // pool.query runs a single query on the database.
             //$1 is mapped to the first element of { id } (which is just the value of id). 
-            "SELECT * FROM Posts WHERE id = $1", [id]
+            "SELECT * FROM Posts WHERE post_id = $1", [id]
         );
         res.json(posts.rows[0]); 
 // we already know that the row array contains a single element, and here we are trying to access it
@@ -183,7 +181,7 @@ app.put('/api/posts/:id', async(req, res) => {
         const post = req.body;
         console.log("update request has arrived");
         const updatepost = await pool.query(
-            "UPDATE Posts SET (title, body, urllink) = ($2, $3, $4) WHERE id = $1", [id, post.title, post.body, post.urllink]
+            "UPDATE Posts SET content = $2 WHERE post_id = $1 RETURNING *", [id, content]
         );
         res.json(updatepost);
     } catch (err) {
@@ -198,7 +196,7 @@ app.delete('/api/posts/:id', async(req, res) => {
         //const post = req.body; // we do not need a body for a delete request
         console.log("delete a post request has arrived");
         const deletepost = await pool.query(
-            "DELETE FROM Posts WHERE id = $1", [id]
+            "DELETE FROM Posts WHERE post_id = $1 RETURNING *", [id]
         );
         res.json(deletepost);
     } catch (err) {
