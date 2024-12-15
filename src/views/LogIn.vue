@@ -79,6 +79,7 @@ LogIn() {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin: auto;
 }
 
 h3 {
@@ -145,5 +146,11 @@ input:focus {
 
 .signup-button:hover {
   background-color: #218838;
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    width: 90%;
+  }
 }
 </style>

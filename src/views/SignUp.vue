@@ -70,13 +70,13 @@ SignUp() {
 
 .signup-form {
   background-color: #e8f5e9;
-  padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   width: 30%;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin: auto;
 }
 
 h3 {
@@ -127,5 +127,11 @@ input:focus {
 
 .signup-button:hover {
   background-color: #0056b3;
+}
+
+@media (max-width: 480px) {
+  .signup-form {
+    width: 90%;
+  }
 }
 </style>
